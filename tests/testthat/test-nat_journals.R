@@ -6,7 +6,7 @@ test_that("nat_journals returns a tibble with correct columns", {
 
 test_that("nat_journals returns full list when no input is provided", {
   result <- nat_journals()
-  expect_gt(nrow(result), 60)  # Should contain many journals
+  expect_gt(nrow(result), 60)
 })
 
 test_that("nat_journals filters correctly (case-insensitive match)", {
