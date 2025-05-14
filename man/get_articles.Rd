@@ -6,7 +6,7 @@
 \usage{
 get_articles(journal, article_selector = ".c-card.c-card--flush",
              title_selector = "h3 a", url_selector = "h3 a",
-             abstract_selector = ".c-card__summary")
+             abstract_selector = ".c-card__summary", verbose = FALSE)
 }
 \arguments{
 \item{journal}{Character string. The full name of the Nature journal (e.g., "Nature Biotechnology", "Nature Medicine").}
@@ -18,6 +18,8 @@ get_articles(journal, article_selector = ".c-card.c-card--flush",
 \item{url_selector}{Character string. CSS selector for extracting article URLs. Default is "h3 a".}
 
 \item{abstract_selector}{Character string. CSS selector for extracting article abstracts. Default is ".c-card__summary".}
+
+\item{verbose}{Logical. If TRUE, prints messages about progress and internal steps. Default is FALSE.}
 }
 \value{
 A tibble with columns: \code{title}, \code{url}, \code{abstract}, and \code{source}. If no articles are found, returns an empty tibble.
@@ -28,11 +30,11 @@ extracting article titles, URLs, and abstracts with robust fallback handling.
 }
 \details{
 The journal argument is matched (case-insensitively) against available entries from \code{nat_journals()}.
-If not found, an error is thrown. Abstracts that are missing are replaced with "Abstract not available".
+If not found, an informative error is thrown. Abstracts that are missing are replaced with "Abstract not available".
 If titles, URLs, and abstracts differ in length, they are truncated to the shortest length with a warning.
 }
 \examples{
 get_articles("Nature Biotechnology")
-get_articles("Nature Reviews Genetics")
+get_articles("Nature Reviews Genetics", verbose = TRUE)
 
 }
