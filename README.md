@@ -1,0 +1,22 @@
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+# NatChat
+
+<!-- badges: start -->
+
+<!-- badges: end -->
+
+The goal of NatChat is to provide fast, local-language-model-powered
+summaries of articles from the current issues of Nature journals, making
+cutting-edge science more accessible and digestible.
+
+## Installation
+
+You can install the development version of NatChat from
+[GitHub](https://github.com/) with:
+
+``` r
+# install.packages("pak")
+pak::pak("monahton/NatChat")
+```
