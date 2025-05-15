@@ -1,6 +1,6 @@
 bibentry(
     bibtype = "Manual",
-    title = "NatChat: Chatting with Nature Journals Current Issue using a local LLM",
+    title = "NatChat: Chatting with Nature Journals Current Issue using a local Language Model",
     author = person("Monah", "Abou Alezz"),
     year = 2025,
     note = "R package version 1.0.1",
