@@ -107,4 +107,123 @@ add_prompt <- function(article, ...) {
 }
 
 
+#' @title Generate Summaries for Articles
+#'
+#' @description
+#' This function generates concise summaries for each article in a given data frame, using the specified language model (LLM).
+#' The summaries are generated based on the prompts previously added to the data frame.
+#'
+#' @usage
+#' add_summary(article, model = "llama3.1", host = NULL)
+#'
+#' @param article A data frame or tibble containing at least a `"prompt"` column, which is created using `build_prompt()` or `add_prompt()`.
+#' @param model Character string. The name of the LLM model to use for generating summaries. Default is `"llama3.1"`.
+#' @param host Character string or NULL. The host to be used for the `ollamar::generate` function. Default is NULL.
+#'
+#' @return A modified data frame of class `article_summary`, including an additional column `"summary"` containing the generated summaries.
+#'
+#' @details
+#' The function iterates over each article and generates a summary using the specified LLM model. A progress bar is shown to track the summarization process. Any newlines within the text fields are removed to ensure clean formatting. This function is typically used after applying `add_prompt()` to prepare a dataset for summarization.
+#'
+#' The progress bar updates for each article as the summaries are being generated. The final `summary` column will contain the output of the summarization process, ready for further processing or analysis.
+#'
+#' @examples
+#' \dontrun{
+#' papers <- get_article(journal = "Nature Medicine")
+#' papers_with_prompts <- add_prompt(papers, nsentences = 3)
+#' summarized_papers <- add_summary(papers_with_prompts)
+#' }
+#'
+#' @importFrom dplyr mutate across everything
+#' @importFrom ollamar generate
+#' @importFrom utils setTxtProgressBar txtProgressBar
+#' @export
+#' @keywords summarization text-processing language-model
+
+add_summary <- function(article, model = "llama3.1", host = NULL) {
+  message("Summarizing articles... please be patient as this might take several minutes...")
+  if (!inherits(article, "data.frame")) stop("Expecting a data frame.")
+  if (!"prompt" %in% colnames(article)) stop("Expecting a column named 'prompt' in the data frame.")
+  num_articles <- nrow(article)
+  progress_bar <- txtProgressBar(min = 0, max = num_articles, style = 3)
+  suppressMessages({
+    summaries <- character(num_articles)
+    for (i in 1:num_articles) {
+      summaries[i] <- ollamar::generate(model = model, prompt = article$prompt[i], output = "text", host = host)
+      setTxtProgressBar(progress_bar, i)
+    }
+    article$summary <- summaries
+  })
+  article <- article |>
+    dplyr::mutate(
+      dplyr::across(dplyr::everything(), ~trimws(gsub("\n", " ", .)))
+    )
+  close(progress_bar)
+  class(article) <- c("article_summary", class(article))
+  return(article)
+}
+
+
+#' @title Filter Articles Based on Whitelist Terms
+#'
+#' @description
+#' This function filters a data frame of articles, retaining only those that contain at least one of the specified whitelist terms
+#' in either the title or abstract. This allows for easy extraction of articles relevant to a set of predefined topics.
+#'
+#' @usage
+#' filter_articles(article, whitelist_terms)
+#'
+#' @param article A data frame or tibble containing at least the `"title"` and `"abstract"` columns.
+#' @param whitelist_terms A character vector of terms that are used to filter articles by matching the title or abstract.
+#'
+#' @return A filtered data frame containing only articles where at least one of the whitelist terms is found in the title or abstract.
+#'
+#' @details
+#' The function combines the "title" and "abstract" columns into a single text string and uses regular expression matching to search
+#' for the presence of any of the specified whitelist terms. The search is case-insensitive. Only the articles that match one or more
+#' of the whitelist terms will be retained in the output data frame.
+#'
+#' @examples
+#' \dontrun{
+#' papers <- get_article(journal = "Nature Medicine")
+#' filtered_papers <- filter_articles(papers, whitelist_terms = c("CRISPR", "gene therapy"))
+#' }
+#'
+#' @export
+#' @keywords filtering text-search articles
+
+filter_articles <- function(article, whitelist_terms) {
+  if (!inherits(article, "data.frame")) stop("Expecting a data frame.")
+  if (!all(c("title", "abstract") %in% colnames(article))) {
+    stop("Expecting columns 'title' and 'abstract' in the data frame.")
+  }
+  combined_text <- paste(article$title, article$abstract)
+  pattern <- paste(whitelist_terms, collapse = "|")
+  filtered_articles <- article[grepl(pattern, combined_text, ignore.case = TRUE), ]
+  return(filtered_articles)
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
