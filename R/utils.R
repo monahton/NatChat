@@ -60,3 +60,51 @@ build_prompt <- function(
   )
   return(prompt)
 }
+
+#' @title Add Summarization Prompts to Articles
+#'
+#' @description
+#' Adds a prompt column to a data frame of scientific articles, suitable for use with a language model summarization tool.
+#' Prompts are generated using the `build_prompt()` function, based on article titles and abstracts.
+#'
+#' @usage
+#' add_prompt(article, ...)
+#'
+#' @param article A data frame or tibble containing at least the columns `"title"` and `"abstract"`.
+#' @param ... Additional arguments passed to `build_prompt()`, such as `nsentences`.
+#'
+#' @return A modified data frame of class `article_prompt`, including an additional column `"prompt"` containing structured summarization prompts.
+#'
+#' @details
+#' The function checks for the presence of required columns before proceeding. It applies `build_prompt()` row-wise to generate summarization prompts.
+#'
+#' This function is typically used after retrieving articles via `get_articles()` or `get_article()`, to prepare data for summarization by a language model (e.g., using `ollama::generate()`).
+#'
+#' @examples
+#' \dontrun{
+#' papers <- get_articles("Nature Medicine")
+#' papers_with_prompts <- add_prompt(papers, nsentences = 3)
+#' cat(papers_with_prompts$prompt[1])
+#' }
+#'
+#' @importFrom dplyr mutate
+#' @export
+#' @keywords summarization prompt-engineering text-processing
+add_prompt <- function(article, ...) {
+  if (!inherits(article, "data.frame")) {
+    stop("Expecting a data frame.")
+  }
+  if (!"title" %in% colnames(article)) {
+    stop("Expecting a column named 'title' in the data frame.")
+  }
+  if (!"abstract" %in% colnames(article)) {
+    stop("Expecting a column named 'abstract' in the data frame.")
+  }
+  article <- article |>
+    dplyr::mutate(prompt = build_prompt(title = .data$title, abstract = .data$abstract, ...))
+  class(article) <- c("article_prompt", class(article))
+  return(article)
+}
+
+
+
