@@ -204,6 +204,50 @@ filter_articles <- function(article, whitelist_terms) {
 }
 
 
+#' @title Format Articles as a TinyTable
+#'
+#' @description
+#' This function formats a data frame of articles into a markdown-styled table using the `tinytable` package.
+#' It allows you to select specific columns from the article data and adjust the column widths for a clean, formatted output.
+#'
+#' @usage
+#' tt_article(article, cols = c("title", "summary"), width = c(1, 3))
+#'
+#' @param article A data frame containing article information (e.g., "title", "summary", "url").
+#' @param cols A character vector of column names to include in the table. Default is `c("title", "summary")`.
+#' @param width A numeric vector specifying column widths. Default is `c(1, 3)`.
+#'
+#' @return A formatted markdown table as a character string, ready to be displayed in markdown-supported environments.
+#'
+#' @details
+#' The function first ensures that the specified columns exist in the data frame and that the length of `cols` matches the length of `width`.
+#' It then formats the "title" column as a markdown link, using the article's URL (if provided), and selects the requested columns to be displayed in the table.
+#' The resulting table is formatted as markdown for easy integration into markdown environments.
+#'
+#' @examples
+#' \dontrun{
+#' papers <- get_articles(journal = "Nature Biotechnology")
+#' papers_with_summary <- add_summary(papers)
+#' tt_article(papers_with_summary)
+#' }
+#'
+#' @importFrom dplyr mutate select all_of
+#' @importFrom tinytable tt format_tt
+#' @export
+#' @keywords formatting markdown table
+tt_article <- function(article, cols=c("title", "summary"), width=c(1,3)) {
+  if (!inherits(article, "data.frame")) stop("Expecting a data frame.")
+  if (!all(cols %in% colnames(article))) stop("Requested columns not in tibble")
+  if (!identical(length(cols), length(width))) stop("Length of cols must equal length of width")
+  article |>
+    dplyr::mutate("title"=sprintf("[%s](%s)", .data$title, .data$url)) |>
+    dplyr::select(dplyr::all_of(cols)) |>
+    tinytable::tt(width=width) |>
+    tinytable::format_tt(markdown=TRUE)
+}
+
+
+
 
 
 
