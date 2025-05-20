@@ -4,7 +4,7 @@ Title: Chatting with Nature Journals Current Issue using a local Language Model
 Version: 1.0.0
 Authors@R: c(
     person("Monah", "Abou Alezz", email = "aboualezz.monah@hsr.it", role = c("aut", "cre", "cph"), comment = c(ORCID = "0000-0002-2006-4250")))
-Description: NatChat provides tools to scrape, process, and summarise abstracts from the current issue of journals published by Nature Portfolio. The package includes functions to identify available journals, retrieve articles from the latest issues, construct prompts for summarization and generate natural-language summaries using large language models (LLMs) via the 'ollama' interface. 
+Description: The goal of NatChat is to provide fast, local-language-model-powered summaries of articles from the current issues of Nature journals, making cutting-edge science more accessible and digestible. The package includes functions to identify available journals, retrieve articles from the latest issues, construct prompts for summarization and generate natural-language summaries using large language models (LLMs) via the 'ollama' interface. 
     Output can be formatted for use in markdown tables, reports, or summaries. This tool is particularly useful for researchers, educators, and clinicians who want to stay up to date with the latest literature across multiple disciplines.
 License: GPL (>= 3)
 Encoding: UTF-8
