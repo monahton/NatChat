@@ -54,7 +54,7 @@
 <div class="section level2">
 <h2 id="id_-overview">📦 Overview<a class="anchor" aria-label="anchor" href="#id_-overview"></a>
 </h2>
-<p>NatChat is an R package designed to facilitate seamless interaction with the current issues of journals published by the Nature Portfolio. It is inspired from the <a href="https://github.com/stephenturner/biorecap" class="external-link">biorecap</a> R package developed by the talented Stephen Turner. NatChat provides functions to:</p>
+<p>NatChat is an R package designed to summarize all papers in the current issues of journals published by the Nature Portfolio. It is inspired from the <a href="https://github.com/stephenturner/biorecap" class="external-link">biorecap</a> R package developed by the talented Stephen Turner. NatChat provides functions to:</p>
 <ul>
 <li>Identify available Nature journals supported by the package.</li>
 <li>Scrape and retrieve article abstracts from the latest issues of Nature journals.</li>
@@ -70,9 +70,12 @@
 </h2>
 <p>You can install the development version of NatChat from <a href="https://github.com/" class="external-link">GitHub</a> with:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"pak"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<code class="sourceCode R"><span><span class="co"># Install `pak` package if not already installed</span></span>
+<span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"pak"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"pak"</span><span class="op">)</span></span>
 <span><span class="op">}</span></span>
+<span></span>
+<span><span class="co"># Install NatChat package</span></span>
 <span><span class="fu">pak</span><span class="fu">::</span><span class="fu"><a href="https://pak.r-lib.org/reference/pak.html" class="external-link">pak</a></span><span class="op">(</span><span class="st">"monahton/NatChat"</span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Load the package</span></span>
@@ -83,19 +86,99 @@
 </h2>
 <p>NatChat uses the <code>ollamar</code> package to interface with local large language models (LLMs) powered by <strong>Ollama</strong>. Before using NatChat’s summarization functions, ensure you have the Ollama software installed on your machine:</p>
 <ul>
-<li>Download and install Ollama from the <a href="https://ollama.com/" class="external-link">official site</a>.</li>
+<li>Download and install Ollama software from the <a href="https://ollama.com/" class="external-link">official site</a>.</li>
+<li>Install the <code>ollamar</code> <a href="https://cran.r-project.org/web/packages/ollamar/index.html" class="external-link">R package</a>
+</li>
 <li>Once installed, verify your setup in R:</li>
 </ul>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/monahton/NatChat" class="external-link">NatChat</a></span><span class="op">)</span></span>
-<span><span class="fu">test_connection</span><span class="op">(</span><span class="op">)</span>    <span class="co"># Checks if Ollama is correctly connected</span></span>
-<span><span class="fu">list_models</span><span class="op">(</span><span class="op">)</span>        <span class="co"># Lists available LLM models for summarization</span></span></code></pre></div>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://hauselin.github.io/ollama-r/" class="external-link">ollamar</a></span><span class="op">)</span></span>
+<span><span class="fu"><a href="reference/check_ollama.html">check_ollama</a></span><span class="op">(</span><span class="op">)</span>    <span class="co"># Checks if Ollama is correctly connected</span></span></code></pre></div>
 <p>Make sure Ollama is running and accessible to R before proceeding with summarization tasks.</p>
 <hr>
 </div>
 <div class="section level2">
+<h2 id="id_-quick-start">✅ Quick start<a class="anchor" aria-label="anchor" href="#id_-quick-start"></a>
+</h2>
+<p>The easiest way to use <strong>NatChat</strong> is through the <code><a href="reference/summarize_journal.html">summarize_journal()</a></code> function, which provides a <strong>one-command workflow</strong> for summarizing the articles in the current issue of a Nature journal and saving the results as both CSV and HTML reports.</p>
+<p>This function handles the full NatChat pipeline: - Retrieves articles from the current issue of a specified journal, - Builds prompts for summarization, - Generates summaries using a local LLM via the <strong>Ollama</strong> interface, - Saves the results in well-formatted report files.</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="reference/summarize_journal.html">summarize_journal</a></span><span class="op">(</span>journal <span class="op">=</span> <span class="st">"Nature Biotechnology"</span>,</span>
+<span>                  filename <span class="op">=</span> <span class="st">"nature_biotechnology_summary"</span>,</span>
+<span>                  outdir <span class="op">=</span> <span class="st">"."</span>,</span>
+<span>                  model <span class="op">=</span> <span class="st">"llama3.1"</span>,</span>
+<span>                  save_csv <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>                  save_html <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>                  verbose <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>                  whitelist <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span>
+<span>                  </span></code></pre></div>
+<p><br></p>
+<div class="section level3">
+<h3 id="id_-arguments">🧩 Arguments<a class="anchor" aria-label="anchor" href="#id_-arguments"></a>
+</h3>
+<table class="table">
+<colgroup>
+<col width="33%">
+<col width="33%">
+<col width="33%">
+</colgroup>
+<thead><tr class="header">
+<th>Argument</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td><code>journal</code></td>
+<td><code>character</code></td>
+<td>The name of the journal (e.g., <code>"Nature Medicine"</code>). Must match one of the options returned by <code><a href="reference/nat_journals.html">nat_journals()</a></code>.</td>
+</tr>
+<tr class="even">
+<td><code>filename</code></td>
+<td><code>character</code></td>
+<td>Base name for the output files (without extension). The function will append <code>.csv</code> and/or <code>.html</code> as appropriate.</td>
+</tr>
+<tr class="odd">
+<td><code>outdir</code></td>
+<td><code>character</code></td>
+<td>Path to the directory where the output files will be saved. Default is the current directory (<code>"."</code>).</td>
+</tr>
+<tr class="even">
+<td><code>model</code></td>
+<td><code>character</code></td>
+<td>Name of the local language model to use via Ollama (e.g., <code>"llama3.1"</code>). Must be installed and available in the Ollama environment.</td>
+</tr>
+<tr class="odd">
+<td><code>save_csv</code></td>
+<td><code>logical</code></td>
+<td>Whether to save the output summary as a CSV file. Default is <code>TRUE</code>.</td>
+</tr>
+<tr class="even">
+<td><code>save_html</code></td>
+<td><code>logical</code></td>
+<td>Whether to save the output summary as an HTML report. Default is <code>TRUE</code>.</td>
+</tr>
+<tr class="odd">
+<td><code>verbose</code></td>
+<td><code>logical</code></td>
+<td>If <code>TRUE</code>, prints progress messages during execution. Useful for monitoring longer summarizations.</td>
+</tr>
+<tr class="even">
+<td><code>whitelist</code></td>
+<td>
+<code>character</code> or <code>NULL</code>
+</td>
+<td>Optional vector of keywords of interest to filter articles for summarization (e.g., “gene therapy”, “RNA-seq”). If <code>NULL</code>, all articles are processed.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section level2">
 <h2 id="id_-functions-highlights">📁 Functions Highlights<a class="anchor" aria-label="anchor" href="#id_-functions-highlights"></a>
 </h2>
+<p>While the <code><a href="reference/summarize_journal.html">summarize_journal()</a></code> function is the main user-facing tool in NatChat, designed to automate the end-to-end summarization workflow, internally, it builds upon a series of modular core functions listed below. These functions can also be used individually or customized for advanced usage and finer control over each step of the summarization process (eg., the prompt to summarize the article, number of sentences, …etc)</p>
 <table class="table">
 <colgroup>
 <col width="50%">
