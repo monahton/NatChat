@@ -40,9 +40,9 @@ NatChat is an R package designed to summarize all papers in the current issues o
 
 This package is particularly useful for researchers, educators, and clinicians aiming to stay updated with the latest scientific literature across multiple disciplines through automated summarization and easy-to-use interfaces.
 
+<br>
 
 ---
-
 
 ## 💻 Installation
 
@@ -64,6 +64,9 @@ pak::pak("monahton/NatChat")
 library(NatChat)
 ```
 
+<br>
+
+---
 
 ## 👉 Requirements: Ollama Setup
 
@@ -81,6 +84,8 @@ check_ollama()    # Checks if Ollama is correctly connected
 ```
 
 Make sure Ollama is running and accessible to R before proceeding with summarization tasks.
+
+<br>
 
 ---
 
@@ -119,6 +124,8 @@ summarize_journal(journal = "Nature Biotechnology",
 | `verbose`    | `logical`   | If `TRUE`, prints progress messages during execution. Useful for monitoring longer summarizations. |
 | `whitelist`  | `character` or `NULL` | Optional vector of keywords of interest to filter articles for summarization (e.g., "gene therapy", "RNA-seq"). If `NULL`, all articles are processed. |
 
+<br>
+
 ---
 
 ## 📁 Functions Highlights
@@ -135,6 +142,8 @@ While the `summarize_journal()` function is the main user-facing tool in NatChat
 | `add_summary()`     | Generates natural language summaries using the Ollama interface and LLMs.       |
 | `save_report()`     | Saves the final formatted summaries into a report file.                         |
 
+<br>
+
 ---
 
 ## 🛠️ Development & Contributing
@@ -144,6 +153,8 @@ While the `summarize_journal()` function is the main user-facing tool in NatChat
 - 🔧 Open issues: https://github.com/monahton/NatChat/issues
 - 📬 Email: <aboualezz.monah@hsr.it>
 - 🤝 Contributuons and Pull Requests encouraged!
+
+<br>
 
 ---
 
@@ -158,6 +169,8 @@ IRCCS San Raffaele Scientific Institute, Milan, Italy
 
 [![saythanks](https://img.shields.io/badge/say-thanks-ff69b4.svg)](https://saythanks.io/to/monahton)
 `r badger::badge_custom("follow me on", "LinkedIn", "blue", "https://linkedin.com/in/monah-abou-alezz-phd-06a948ba")`
+
+<br>
 
 ---
 

@@ -38,6 +38,8 @@ clinicians aiming to stay updated with the latest scientific literature
 across multiple disciplines through automated summarization and
 easy-to-use interfaces.
 
+<br>
+
 ------------------------------------------------------------------------
 
 ## 💻 Installation
@@ -60,6 +62,10 @@ pak::pak("monahton/NatChat")
 library(NatChat)
 ```
 
+<br>
+
+------------------------------------------------------------------------
+
 ## 👉 Requirements: Ollama Setup
 
 NatChat uses the `ollamar` package to interface with local large
@@ -81,6 +87,8 @@ check_ollama()    # Checks if Ollama is correctly connected
 
 Make sure Ollama is running and accessible to R before proceeding with
 summarization tasks.
+
+<br>
 
 ------------------------------------------------------------------------
 
@@ -122,6 +130,8 @@ summarize_journal(journal = "Nature Biotechnology",
 | `verbose` | `logical` | If `TRUE`, prints progress messages during execution. Useful for monitoring longer summarizations. |
 | `whitelist` | `character` or `NULL` | Optional vector of keywords of interest to filter articles for summarization (e.g., “gene therapy”, “RNA-seq”). If `NULL`, all articles are processed. |
 
+<br>
+
 ------------------------------------------------------------------------
 
 ## 📁 Functions Highlights
@@ -143,6 +153,8 @@ process (eg., the prompt to summarize the article, number of sentences,
 | `add_summary()` | Generates natural language summaries using the Ollama interface and LLMs. |
 | `save_report()` | Saves the final formatted summaries into a report file. |
 
+<br>
+
 ------------------------------------------------------------------------
 
 ## 🛠️ Development & Contributing
@@ -153,6 +165,8 @@ developed. Contributions and suggestions are welcome!
 - 🔧 Open issues: <https://github.com/monahton/NatChat/issues>
 - 📬 Email: <aboualezz.monah@hsr.it>
 - 🤝 Contributuons and Pull Requests encouraged!
+
+<br>
 
 ------------------------------------------------------------------------
 
@@ -167,5 +181,7 @@ IRCCS San Raffaele Scientific Institute, Milan, Italy
 
 [![saythanks](https://img.shields.io/badge/say-thanks-ff69b4.svg)](https://saythanks.io/to/monahton)
 [![](https://img.shields.io/badge/follow%20me%20on-LinkedIn-blue.svg)](https://linkedin.com/in/monah-abou-alezz-phd-06a948ba)
+
+<br>
 
 ------------------------------------------------------------------------
