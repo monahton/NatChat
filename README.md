@@ -21,8 +21,10 @@ commit](https://img.shields.io/github/last-commit/monahton/NatChat)](https://git
 ## 📦 Overview
 
 NatChat is an R package designed to facilitate seamless interaction with
-the current issues of journals published by the Nature Portfolio. It
-provides functions to:
+the current issues of journals published by the Nature Portfolio. It is
+inspired from the [biorecap](https://github.com/stephenturner/biorecap)
+R package developed by the talented Stephen Turner. NatChat provides
+functions to:
 
 - Identify available Nature journals supported by the package.
 - Scrape and retrieve article abstracts from the latest issues of Nature
