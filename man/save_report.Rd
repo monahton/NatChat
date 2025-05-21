@@ -9,7 +9,7 @@ save_report(input, filename, save_csv, save_html, title, cols, width, verbose, o
 \arguments{
 \item{input}{A data frame containing article data (e.g., "title", "summary", "url").}
 
-\item{filename}{A character string specifying the base filename (without extension).}
+\item{filename}{A character string specifying the base filename.}
 
 \item{save_csv}{Logical. Save output as a CSV file? Default is TRUE.}
 

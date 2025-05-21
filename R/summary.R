@@ -8,7 +8,7 @@
 #' save_report(input, filename, save_csv, save_html, title, cols, width, verbose, outdir)
 #'
 #' @param input A data frame containing article data (e.g., "title", "summary", "url").
-#' @param filename A character string specifying the base filename (without extension).
+#' @param filename A character string specifying the base filename.
 #' @param save_csv Logical. Save output as a CSV file? Default is TRUE.
 #' @param save_html Logical. Save output as an HTML file? Default is TRUE.
 #' @param title A character string specifying the HTML page title. Default is "Article Summary Report".
