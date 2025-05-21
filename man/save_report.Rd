@@ -4,7 +4,7 @@
 \alias{save_report}
 \title{Save Report as CSV and HTML}
 \usage{
-save_report(input, filename, save_csv, save_html, title, cols, width, verbose = TRUE)
+save_report(input, filename, save_csv, save_html, title, cols, width, verbose, outdir)
 }
 \arguments{
 \item{input}{A data frame containing article data (e.g., "title", "summary", "url").}
@@ -22,6 +22,8 @@ save_report(input, filename, save_csv, save_html, title, cols, width, verbose = 
 \item{width}{A numeric vector of column widths for the HTML table. Default is c(1, 3).}
 
 \item{verbose}{Logical. Should messages be printed? Default is TRUE.}
+
+\item{outdir}{A character string specifying the directory to save files. Default is current working directory ".".}
 }
 \value{
 Files are written to disk in the specified formats. The function returns (invisibly) a list of saved file paths.
@@ -38,7 +40,7 @@ If both save_csv and save_html are FALSE, no files are saved and a message is is
 \dontrun{
 papers <- get_articles(journal = "Nature Medicine")
 papers_with_summary <- add_summary(papers)
-save_report(papers_with_summary, "Summary", save_csv = TRUE, save_html = TRUE)
+save_report(papers_with_summary, save_csv = TRUE, save_html = TRUE)
 }
 
 }

@@ -5,7 +5,7 @@
 #' Options are provided to control file format outputs and verbosity.
 #'
 #' @usage
-#' save_report(input, filename, save_csv, save_html, title, cols, width, verbose = TRUE)
+#' save_report(input, filename, save_csv, save_html, title, cols, width, verbose, outdir)
 #'
 #' @param input A data frame containing article data (e.g., "title", "summary", "url").
 #' @param filename A character string specifying the base filename (without extension).
@@ -15,6 +15,7 @@
 #' @param cols A character vector of column names to include in the output. Default is c("title", "summary").
 #' @param width A numeric vector of column widths for the HTML table. Default is c(1, 3).
 #' @param verbose Logical. Should messages be printed? Default is TRUE.
+#' @param outdir A character string specifying the directory to save files. Default is current working directory ".".
 #'
 #' @return
 #' Files are written to disk in the specified formats. The function returns (invisibly) a list of saved file paths.
@@ -27,7 +28,7 @@
 #' \dontrun{
 #' papers <- get_articles(journal = "Nature Medicine")
 #' papers_with_summary <- add_summary(papers)
-#' save_report(papers_with_summary, "Summary", save_csv = TRUE, save_html = TRUE)
+#' save_report(papers_with_summary, save_csv = TRUE, save_html = TRUE)
 #' }
 #'
 #' @importFrom dplyr select all_of
@@ -37,13 +38,14 @@
 #' @export
 #' @keywords file export, markdown, HTML, CSV
 
-save_report <- function(input, filename,
+save_report <- function(input, filename = "natchat_summary",
                         save_csv = TRUE,
                         save_html = TRUE,
                         title = "Article Summary Report",
                         cols = c("title", "summary"),
                         width = c(1, 3),
-                        verbose = TRUE) {
+                        verbose = TRUE,
+                        outdir = ".") {
 
   if (!inherits(input, "data.frame")) stop("input must be a data frame.")
 
@@ -59,9 +61,9 @@ save_report <- function(input, filename,
 
   filename <- tools::file_path_sans_ext(filename)
   timestamp <- format(Sys.time(), "%Y%m%d")
-  filename <- paste0(filename, "_", timestamp)
-  csv_file <- paste0(filename, ".csv")
-  html_file <- paste0(filename, ".html")
+  base_filename <- paste0(filename, "_", timestamp)
+  csv_file <- file.path(outdir, paste0(base_filename, ".csv"))
+  html_file <- file.path(outdir, paste0(base_filename, ".html"))
 
   now <- Sys.time()
   date_str <- format(now, "%B %d, %Y")
@@ -122,4 +124,70 @@ save_report <- function(input, filename,
   }
 
   invisible(saved_files)
+}
+
+
+#' @title Summarize a Nature Journal Issue
+#'
+#' @description
+#' Retrieve and summarize abstracts from the current issue of a selected Nature Portfolio journal using a local LLM and save the output as CSV and/or HTML.
+#'
+#' @usage
+#' summarize_journal(journal, model, filename, save_csv, save_html, verbose, outdir)
+#'
+#' @param journal A character string indicating the name of the supported Nature journal (e.g., "Nature Biotechnology").
+#' @param model A character string specifying the local Ollama model to use for summarization (e.g., "llama3:instruct").
+#' @param filename A character string specifying the base filename for saving the report. Default is "natchat_summary".
+#' @param save_csv Logical. Save the results as a CSV file? Default is TRUE.
+#' @param save_html Logical. Save the results as an HTML file? Default is TRUE.
+#' @param verbose Logical. Should informative messages be printed to the console? Default is TRUE.
+#' @param outdir A character string specifying the directory to save output files. Default is current working directory ".".
+#'
+#' @return
+#' Invisibly returns a list of file paths (if saved). Generates summarized article metadata and optionally saves it to disk.
+#'
+#' @details
+#' This function is a convenience wrapper around `get_articles()`, `add_prompt()`, `add_summary()`, and `save_report()`.
+#' It scrapes the current issue, summarizes abstracts using a local LLM, and exports the result.
+#'
+#' @examples
+#' \dontrun{
+#' summarize_journal(journal = "Nature Medicine", model = "llama3", save_csv = TRUE, save_html = TRUE)
+#' }
+#'
+#' @export
+#' @keywords summarization, LLM, article, Nature, export
+
+summarize_journal <- function(journal,
+                              model = "llama3.1",
+                              filename = "natchat_summary",
+                              save_csv = TRUE,
+                              save_html = TRUE,
+                              verbose = TRUE,
+                              outdir = ".") {
+
+  if (verbose) message("Scraping articles from journal: ", journal)
+  df <- get_articles(journal, verbose = FALSE)
+
+  if (nrow(df) == 0) {
+    stop("No articles found. Please check available journal names by running `nat_journals()` function or try again later.")
+  }
+
+  if (verbose) message("Building prompts...")
+  df <- add_prompt(df)
+
+  if (verbose) message("Generating summaries using model: ", model)
+  df <- add_summary(df, model = model)
+
+  if (verbose) message("Saving report...")
+  paths <- save_report(
+    input = df,
+    filename = filename,
+    save_csv = save_csv,
+    save_html = save_html,
+    verbose = verbose,
+    outdir = outdir
+  )
+
+  invisible(paths)
 }
