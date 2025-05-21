@@ -55,7 +55,7 @@ pak::pak("monahton/NatChat")
 
 ``` r
 # Load the package
-library(GencoDymo2)
+library(NatChat)
 ```
 
 ## 👉 Requirements: Ollama Setup

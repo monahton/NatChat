@@ -56,8 +56,5 @@ prompt <- build_prompt(title, abstract, nsentences = 3)
 cat(prompt)
 
 }
-\keyword{LLM}
 \keyword{NLP}
-\keyword{engineering}
 \keyword{prompt}
-\keyword{summarization}

@@ -36,7 +36,7 @@
 #' @importFrom tinytable save_tt
 #' @importFrom tools file_path_sans_ext
 #' @export
-#' @keywords file export, markdown, HTML, CSV
+#' @keywords markdown, HTML, CSV
 
 save_report <- function(input, filename = "natchat_summary",
                         save_csv = TRUE,
@@ -156,7 +156,7 @@ save_report <- function(input, filename = "natchat_summary",
 #' }
 #'
 #' @export
-#' @keywords summarization, LLM, article, Nature, export
+#' @keywords summarization, paper, Nature, export
 
 summarize_journal <- function(journal,
                               model = "llama3.1",

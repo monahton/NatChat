@@ -37,8 +37,7 @@ summarize_journal(journal = "Nature Medicine", model = "llama3", save_csv = TRUE
 }
 
 }
-\keyword{LLM,}
 \keyword{Nature,}
-\keyword{article,}
 \keyword{export}
+\keyword{paper,}
 \keyword{summarization,}

@@ -32,5 +32,3 @@ cat(papers_with_prompts$prompt[1])
 
 }
 \keyword{prompt-engineering}
-\keyword{summarization}
-\keyword{text-processing}

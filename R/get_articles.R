@@ -31,6 +31,7 @@
 #' @importFrom dplyr mutate distinct
 #' @importFrom tibble tibble
 #' @export
+
 get_articles <- function(journal,
                          article_selector = ".c-card.c-card--flush",
                          title_selector = "h3 a",

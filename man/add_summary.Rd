@@ -34,5 +34,4 @@ summarized_papers <- add_summary(papers_with_prompts)
 
 }
 \keyword{language-model}
-\keyword{summarization}
 \keyword{text-processing}

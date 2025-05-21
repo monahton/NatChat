@@ -46,6 +46,4 @@ save_report(papers_with_summary, save_csv = TRUE, save_html = TRUE)
 }
 \keyword{CSV}
 \keyword{HTML,}
-\keyword{export,}
-\keyword{file}
 \keyword{markdown,}

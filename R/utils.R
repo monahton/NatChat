@@ -29,7 +29,7 @@
 #' cat(prompt)
 #'
 #' @export
-#' @keywords summarization NLP prompt engineering LLM
+#' @keywords NLP prompt
 build_prompt <- function(
     title,
     abstract,
@@ -89,7 +89,8 @@ build_prompt <- function(
 #'
 #' @importFrom dplyr mutate
 #' @export
-#' @keywords summarization prompt-engineering text-processing
+#' @keywords prompt-engineering
+
 add_prompt <- function(article, ...) {
   if (!inherits(article, "data.frame")) {
     stop("Expecting a data frame.")
@@ -138,7 +139,7 @@ add_prompt <- function(article, ...) {
 #' @importFrom ollamar generate
 #' @importFrom utils setTxtProgressBar txtProgressBar
 #' @export
-#' @keywords summarization text-processing language-model
+#' @keywords text-processing language-model
 
 add_summary <- function(article, model = "llama3.1", host = NULL) {
   message("Summarizing articles... please be patient as this might take several minutes...")
@@ -246,28 +247,59 @@ tt_article <- function(article, cols=c("title", "summary"), width=c(1,3)) {
     tinytable::format_tt(markdown=TRUE)
 }
 
+#' @title Check Ollama Installation
+#'
+#' @description
+#' Verify whether the Ollama backend is properly installed and available by testing the connection and retrieving the list of local models.
+#'
+#' @usage
+#' check_ollama(verbose = TRUE)
+#'
+#' @param verbose Logical. Should informative messages be printed to the console? Default is TRUE.
+#'
+#' @return
+#' Logical TRUE if Ollama is installed and responding; otherwise returns FALSE. Also prints diagnostic messages if verbose = TRUE.
+#'
+#' @details
+#' This function internally calls `ollamar::test_connection()` and `ollamar::list_models()` to check the availability of the Ollama service and confirm that at least one local model is installed.
+#'
+#' @examples
+#' \dontrun{
+#' check_ollama()
+#' }
+#'
+#' @importFrom ollamar test_connection list_models
+#' @export
+#' @keywords ollama
 
+check_ollama <- function(verbose = TRUE) {
+  ok_connection <- FALSE
+  ok_models <- FALSE
 
+  # Check connection to Ollama
+  try({
+    ok_connection <- ollamar::test_connection()
+  }, silent = TRUE)
 
+  # Check model list only if connection is successful
+  if (ok_connection) {
+    try({
+      models <- ollamar::list_models()
+      ok_models <- length(models) > 0
+    }, silent = TRUE)
+  }
 
+  if (verbose) {
+    if (!ok_connection) {
+      message("Ollama connection test failed. Ensure Ollama is installed and running.")
+    } else if (!ok_models) {
+      message("Connected to Ollama, but no models are currently installed.")
+    } else {
+      message("Ollama is installed, running, and models are available.")
+    }
+  }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  return(ok_connection && ok_models)
+}
 
 
