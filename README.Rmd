@@ -13,7 +13,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-# NatChat: Chatting with Nature Journals Current Issue using a local Language Model <img src="man/figures/NatChat_logo.png" align="right" height="120"/>
+# NatChat: Chatting with Nature Journals Current Issue using a local Language Model <img src="man/figures/NatChat_logo.png" align="right" height="130"/>
 
 [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![Licence: GPL v3](https://img.shields.io/badge/license-GPL--3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
@@ -105,7 +105,6 @@ summarize_journal(journal = "Nature Biotechnology",
                   whitelist = NULL)
                   
 ```
-<br>
 
 ### 🧩 Arguments
 
@@ -120,6 +119,7 @@ summarize_journal(journal = "Nature Biotechnology",
 | `verbose`    | `logical`   | If `TRUE`, prints progress messages during execution. Useful for monitoring longer summarizations. |
 | `whitelist`  | `character` or `NULL` | Optional vector of keywords of interest to filter articles for summarization (e.g., "gene therapy", "RNA-seq"). If `NULL`, all articles are processed. |
 
+---
 
 ## 📁 Functions Highlights
 

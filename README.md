@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# NatChat: Chatting with Nature Journals Current Issue using a local Language Model <img src="man/figures/NatChat_logo.png" align="right" height="120"/>
+# NatChat: Chatting with Nature Journals Current Issue using a local Language Model <img src="man/figures/NatChat_logo.png" align="right" height="130"/>
 
 [![Project Status: Active – The project has reached a stable, usable
 state and is being actively
@@ -109,8 +109,6 @@ summarize_journal(journal = "Nature Biotechnology",
                   
 ```
 
-<br>
-
 ### 🧩 Arguments
 
 | Argument | Type | Description |
@@ -123,6 +121,8 @@ summarize_journal(journal = "Nature Biotechnology",
 | `save_html` | `logical` | Whether to save the output summary as an HTML report. Default is `TRUE`. |
 | `verbose` | `logical` | If `TRUE`, prints progress messages during execution. Useful for monitoring longer summarizations. |
 | `whitelist` | `character` or `NULL` | Optional vector of keywords of interest to filter articles for summarization (e.g., “gene therapy”, “RNA-seq”). If `NULL`, all articles are processed. |
+
+------------------------------------------------------------------------
 
 ## 📁 Functions Highlights
 
