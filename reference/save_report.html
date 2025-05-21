@@ -41,7 +41,7 @@ Options are provided to control file format outputs and verbosity.</p>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">save_report</span><span class="op">(</span><span class="va">input</span>, <span class="va">filename</span>, <span class="va">save_csv</span>, <span class="va">save_html</span>, <span class="va">title</span>, <span class="va">cols</span>, <span class="va">width</span>, verbose <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">save_report</span><span class="op">(</span><span class="va">input</span>, <span class="va">filename</span>, <span class="va">save_csv</span>, <span class="va">save_html</span>, <span class="va">title</span>, <span class="va">cols</span>, <span class="va">width</span>, <span class="va">verbose</span>, <span class="va">outdir</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -79,6 +79,10 @@ Options are provided to control file format outputs and verbosity.</p>
 <dt id="arg-verbose">verbose<a class="anchor" aria-label="anchor" href="#arg-verbose"></a></dt>
 <dd><p>Logical. Should messages be printed? Default is TRUE.</p></dd>
 
+
+<dt id="arg-outdir">outdir<a class="anchor" aria-label="anchor" href="#arg-outdir"></a></dt>
+<dd><p>A character string specifying the directory to save files. Default is current working directory ".".</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
@@ -95,7 +99,7 @@ If both save_csv and save_html are FALSE, no files are saved and a message is is
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># \dontrun{</span></span></span>
 <span class="r-in"><span><span class="va">papers</span> <span class="op">&lt;-</span> <span class="fu"><a href="get_articles.html">get_articles</a></span><span class="op">(</span>journal <span class="op">=</span> <span class="st">"Nature Medicine"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">papers_with_summary</span> <span class="op">&lt;-</span> <span class="fu"><a href="add_summary.html">add_summary</a></span><span class="op">(</span><span class="va">papers</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu">save_report</span><span class="op">(</span><span class="va">papers_with_summary</span>, <span class="st">"Summary"</span>, save_csv <span class="op">=</span> <span class="cn">TRUE</span>, save_html <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">save_report</span><span class="op">(</span><span class="va">papers_with_summary</span>, save_csv <span class="op">=</span> <span class="cn">TRUE</span>, save_html <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span> <span class="co"># }</span></span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
