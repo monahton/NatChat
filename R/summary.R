@@ -131,46 +131,62 @@ save_report <- function(input, filename = "natchat_summary",
 #'
 #' @description
 #' Retrieve and summarize abstracts from the current issue of a selected Nature Portfolio journal using a local LLM and save the output as CSV and/or HTML.
+#' Optionally filter the articles by a set of whitelist terms.
 #'
 #' @usage
-#' summarize_journal(journal, model, filename, save_csv, save_html, verbose, outdir)
+#' summarize_journal(journal, filename, outdir, model,save_csv,save_html,verbose, whitelist)
 #'
 #' @param journal A character string indicating the name of the supported Nature journal (e.g., "Nature Biotechnology").
-#' @param model A character string specifying the local Ollama model to use for summarization (e.g., "llama3:instruct").
 #' @param filename A character string specifying the base filename for saving the report. Default is "natchat_summary".
+#' @param outdir A character string specifying the directory to save output files. Default is current working directory ".".
+#' @param model A character string specifying the local Ollama model to use for summarization (e.g., "llama3:instruct").
 #' @param save_csv Logical. Save the results as a CSV file? Default is TRUE.
 #' @param save_html Logical. Save the results as an HTML file? Default is TRUE.
 #' @param verbose Logical. Should informative messages be printed to the console? Default is TRUE.
-#' @param outdir A character string specifying the directory to save output files. Default is current working directory ".".
+#' @param whitelist Optional character vector of terms used to filter articles based on title and abstract. Default is NULL (no filtering).
 #'
 #' @return
 #' Invisibly returns a list of file paths (if saved). Generates summarized article metadata and optionally saves it to disk.
 #'
 #' @details
 #' This function is a convenience wrapper around `get_articles()`, `add_prompt()`, `add_summary()`, and `save_report()`.
-#' It scrapes the current issue, summarizes abstracts using a local LLM, and exports the result.
+#' It scrapes the current issue, optionally filters articles using a whitelist of terms, summarizes abstracts using a local LLM, and exports the result.
 #'
 #' @examples
 #' \dontrun{
-#' summarize_journal(journal = "Nature Medicine", model = "llama3", save_csv = TRUE, save_html = TRUE)
+#' summarize_journal(
+#'   journal = "Nature Medicine",
+#'   model = "llama3",
+#'   whitelist = c("CRISPR", "gene therapy"),
+#'   save_csv = TRUE,
+#'   save_html = TRUE
+#' )
 #' }
 #'
 #' @export
-#' @keywords summarization, paper, Nature, export
 
 summarize_journal <- function(journal,
-                              model = "llama3.1",
                               filename = "natchat_summary",
+                              outdir = ".",
+                              model = "llama3.1",
                               save_csv = TRUE,
                               save_html = TRUE,
                               verbose = TRUE,
-                              outdir = ".") {
+                              whitelist = NULL) {
 
   if (verbose) message("Scraping articles from journal: ", journal)
   df <- get_articles(journal, verbose = FALSE)
 
   if (nrow(df) == 0) {
     stop("No articles found. Please check available journal names by running `nat_journals()` function or try again later.")
+  }
+
+  if (!is.null(whitelist)) {
+    if (verbose) message("Filtering articles using whitelist terms...")
+    df <- filter_articles(df, whitelist_terms = whitelist)
+    if (nrow(df) == 0) {
+      stop("No articles matched the whitelist terms. Try different keywords.")
+    }
   }
 
   if (verbose) message("Building prompts...")

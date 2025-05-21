@@ -4,14 +4,16 @@
 \alias{summarize_journal}
 \title{Summarize a Nature Journal Issue}
 \usage{
-summarize_journal(journal, model, filename, save_csv, save_html, verbose, outdir)
+summarize_journal(journal, filename, outdir, model,save_csv,save_html,verbose, whitelist)
 }
 \arguments{
 \item{journal}{A character string indicating the name of the supported Nature journal (e.g., "Nature Biotechnology").}
 
-\item{model}{A character string specifying the local Ollama model to use for summarization (e.g., "llama3:instruct").}
-
 \item{filename}{A character string specifying the base filename for saving the report. Default is "natchat_summary".}
+
+\item{outdir}{A character string specifying the directory to save output files. Default is current working directory ".".}
+
+\item{model}{A character string specifying the local Ollama model to use for summarization (e.g., "llama3:instruct").}
 
 \item{save_csv}{Logical. Save the results as a CSV file? Default is TRUE.}
 
@@ -19,25 +21,28 @@ summarize_journal(journal, model, filename, save_csv, save_html, verbose, outdir
 
 \item{verbose}{Logical. Should informative messages be printed to the console? Default is TRUE.}
 
-\item{outdir}{A character string specifying the directory to save output files. Default is current working directory ".".}
+\item{whitelist}{Optional character vector of terms used to filter articles based on title and abstract. Default is NULL (no filtering).}
 }
 \value{
 Invisibly returns a list of file paths (if saved). Generates summarized article metadata and optionally saves it to disk.
 }
 \description{
 Retrieve and summarize abstracts from the current issue of a selected Nature Portfolio journal using a local LLM and save the output as CSV and/or HTML.
+Optionally filter the articles by a set of whitelist terms.
 }
 \details{
 This function is a convenience wrapper around \code{get_articles()}, \code{add_prompt()}, \code{add_summary()}, and \code{save_report()}.
-It scrapes the current issue, summarizes abstracts using a local LLM, and exports the result.
+It scrapes the current issue, optionally filters articles using a whitelist of terms, summarizes abstracts using a local LLM, and exports the result.
 }
 \examples{
 \dontrun{
-summarize_journal(journal = "Nature Medicine", model = "llama3", save_csv = TRUE, save_html = TRUE)
+summarize_journal(
+  journal = "Nature Medicine",
+  model = "llama3",
+  whitelist = c("CRISPR", "gene therapy"),
+  save_csv = TRUE,
+  save_html = TRUE
+)
 }
 
 }
-\keyword{Nature,}
-\keyword{export}
-\keyword{paper,}
-\keyword{summarization,}
