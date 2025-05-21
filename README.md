@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# NatChat: Chatting with Nature Journals Current Issue using a local Language Model
+# NatChat: Chatting with Nature Journals Current Issue using a local Language Model <img src="man/figures/NatChat_logo.png" align="right" height="140"/>
 
 [![Project Status: Active – The project has reached a stable, usable
 state and is being actively
