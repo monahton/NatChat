@@ -1,7 +1,7 @@
 Package: NatChat
 Type: Package
 Title: Chatting with Nature Journals Current Issue using a local Language Model
-Version: 1.0.0
+Version: 1.0.1
 Authors@R: c(
     person("Monah", "Abou Alezz", email = "aboualezz.monah@hsr.it", role = c("aut", "cre", "cph"), comment = c(ORCID = "0000-0002-2006-4250")))
 Description: The goal of NatChat is to provide fast, local-language-model-powered summaries of articles from the current issues of Nature journals, making cutting-edge science more accessible and digestible. The package includes functions to identify available journals, retrieve articles from the latest issues, construct prompts for summarization and generate natural-language summaries using large language models (LLMs) via the 'ollama' interface. 
