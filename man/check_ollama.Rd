@@ -24,4 +24,7 @@ check_ollama()
 }
 
 }
-\keyword{ollama}
+\keyword{check,}
+\keyword{environment}
+\keyword{llm,}
+\keyword{ollama,}

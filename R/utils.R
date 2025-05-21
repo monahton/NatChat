@@ -270,23 +270,29 @@ tt_article <- function(article, cols=c("title", "summary"), width=c(1,3)) {
 #'
 #' @importFrom ollamar test_connection list_models
 #' @export
-#' @keywords ollama
+#' @keywords ollama, llm, check, environment
 
 check_ollama <- function(verbose = TRUE) {
   ok_connection <- FALSE
   ok_models <- FALSE
 
   # Check connection to Ollama
-  try({
-    ok_connection <- ollamar::test_connection()
-  }, silent = TRUE)
+  conn <- tryCatch(
+    ollamar::test_connection(),
+    error = function(e) NULL
+  )
+
+  if (!is.null(conn) && inherits(conn, "httr2_response") && conn$status_code == 200) {
+    ok_connection <- TRUE
+  }
 
   # Check model list only if connection is successful
   if (ok_connection) {
-    try({
-      models <- ollamar::list_models()
-      ok_models <- length(models) > 0
-    }, silent = TRUE)
+    models <- tryCatch(
+      ollamar::list_models(),
+      error = function(e) NULL
+    )
+    ok_models <- is.data.frame(models) && nrow(models) > 0
   }
 
   if (verbose) {
