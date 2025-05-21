@@ -6,7 +6,7 @@
 [![Project Status: Active – The project has reached a stable, usable
 state and is being actively
 developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
-[![Licence: GPL
+[![License: GPL
 v3](https://img.shields.io/badge/license-GPL--3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 [![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://github.com/monahton)
 [![GitHub
@@ -164,7 +164,7 @@ developed. Contributions and suggestions are welcome!
 
 - 🔧 Open issues: <https://github.com/monahton/NatChat/issues>
 - 📬 Email: <aboualezz.monah@hsr.it>
-- 🤝 Contributuons and Pull Requests encouraged!
+- 🤝 Contributions and Pull Requests encouraged!
 
 <br>
 
