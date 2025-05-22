@@ -12,6 +12,8 @@ v3](https://img.shields.io/badge/license-GPL--3-blue.svg)](https://www.gnu.org/l
 [![GitHub
 issues](https://img.shields.io/github/issues/monahton/NatChat)](https://github.com/monahton/NatChat/issues)
 [![Platform](https://img.shields.io/badge/platform-all-green)](https://cran.r-project.org/)
+[![Website](https://img.shields.io/badge/docs-website-blue)](https://monahton.github.io/NatChat/)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.15482472.svg)](https://doi.org/10.5281/zenodo.15482472)
 
 [![Last
 commit](https://img.shields.io/github/last-commit/monahton/NatChat)](https://github.com/monahton/GencoDymo2/commits/main)
