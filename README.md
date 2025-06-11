@@ -111,7 +111,7 @@ files.
 summarize_journal(journal = "Nature Biotechnology",
                   filename = "nature_biotechnology_summary",
                   outdir = ".",
-                  model = "llama3.1",
+                  model = "llama3.2",
                   save_csv = TRUE,
                   save_html = TRUE,
                   verbose = TRUE,
