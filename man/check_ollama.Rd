@@ -2,21 +2,24 @@
 % Please edit documentation in R/utils.R
 \name{check_ollama}
 \alias{check_ollama}
-\title{Check Ollama Installation}
+\title{Check Ollama Installation and List Available Models}
 \usage{
 check_ollama(verbose = TRUE)
 }
 \arguments{
-\item{verbose}{Logical. Should informative messages be printed to the console? Default is TRUE.}
+\item{verbose}{Logical. Should informative messages and the list of available models be printed to the console? Default is TRUE.}
 }
 \value{
-Logical TRUE if Ollama is installed and responding; otherwise returns FALSE. Also prints diagnostic messages if verbose = TRUE.
+Logical TRUE if Ollama is installed, running, and at least one model is available; otherwise FALSE.
 }
 \description{
-Verify whether the Ollama backend is properly installed and available by testing the connection and retrieving the list of local models.
+Verify whether the Ollama backend is properly installed and running by testing the connection.
+If successful, retrieve and print the list of available local models.
 }
 \details{
-This function internally calls \code{ollamar::test_connection()} and \code{ollamar::list_models()} to check the availability of the Ollama service and confirm that at least one local model is installed.
+The function calls \code{ollamar::test_connection()} to verify the Ollama service is running,
+then calls \code{ollamar::list_models()} to check for installed local models.
+If verbose, it prints detailed diagnostic messages and the model names.
 }
 \examples{
 \dontrun{
@@ -24,7 +27,8 @@ check_ollama()
 }
 
 }
-\keyword{check,}
-\keyword{environment}
-\keyword{llm,}
-\keyword{ollama,}
+\keyword{check}
+\keyword{installation}
+\keyword{llm}
+\keyword{models}
+\keyword{ollama}

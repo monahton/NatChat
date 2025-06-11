@@ -35,16 +35,16 @@ build_prompt <- function(
     abstract,
     nsentences = 3L,
     instructions = c(
-      "I am giving you a paper's title and abstract.",
-      "Summarize the paper in as many sentences as I instruct.",
-      "Do not include any preamble text to the summary,",
-      "just give me the summary with no preface or intro sentence.",
-      "Focus on the findings in the last 2 sentences of the abstract.",
-      "If there is no abstract, just write abstract is not available.",
-      "Highlight any novel contribution or claim made in the abstract.",
-      "Briefly mention the key method or dataset, if explicitly stated.",
-      "Indicate the tone of confidence (e.g., suggestive, strong evidence, preliminary).",
-      "Optionally, provide a one-sentence lay summary for a general audience."
+      "You will receive a paper's title and abstract as input.",
+      "Provide a concise summary with exactly the number of sentences specified.",
+      "Do not include introductory phrases or preamble text.",
+      "Start directly with the summary; avoid any framing statements.",
+      "Focus on key findings, especially of last two sentences of the abstract.",
+      "If the abstract is missing, reply explicitly with 'Abstract is not available.'",
+      "Highlight any novel contributions, claims, or innovations in the abstract.",
+      "Mention main methods or datasets only if explicitly stated in the abstract.",
+      "Indicate the strength and tone of evidence.",
+      "Optionally,add a one-sentence lay summary for a non-specialist audience."
     )
 ) {
   stopifnot(
@@ -247,21 +247,24 @@ tt_article <- function(article, cols=c("title", "summary"), width=c(1,3)) {
     tinytable::format_tt(markdown=TRUE)
 }
 
-#' @title Check Ollama Installation
+#' @title Check Ollama Installation and List Available Models
 #'
 #' @description
-#' Verify whether the Ollama backend is properly installed and available by testing the connection and retrieving the list of local models.
+#' Verify whether the Ollama backend is properly installed and running by testing the connection.
+#' If successful, retrieve and print the list of available local models.
 #'
 #' @usage
 #' check_ollama(verbose = TRUE)
 #'
-#' @param verbose Logical. Should informative messages be printed to the console? Default is TRUE.
+#' @param verbose Logical. Should informative messages and the list of available models be printed to the console? Default is TRUE.
 #'
 #' @return
-#' Logical TRUE if Ollama is installed and responding; otherwise returns FALSE. Also prints diagnostic messages if verbose = TRUE.
+#' Logical TRUE if Ollama is installed, running, and at least one model is available; otherwise FALSE.
 #'
 #' @details
-#' This function internally calls `ollamar::test_connection()` and `ollamar::list_models()` to check the availability of the Ollama service and confirm that at least one local model is installed.
+#' The function calls `ollamar::test_connection()` to verify the Ollama service is running,
+#' then calls `ollamar::list_models()` to check for installed local models.
+#' If verbose, it prints detailed diagnostic messages and the model names.
 #'
 #' @examples
 #' \dontrun{
@@ -270,13 +273,12 @@ tt_article <- function(article, cols=c("title", "summary"), width=c(1,3)) {
 #'
 #' @importFrom ollamar test_connection list_models
 #' @export
-#' @keywords ollama, llm, check, environment
-
+#' @keywords ollama llm models check installation
 check_ollama <- function(verbose = TRUE) {
   ok_connection <- FALSE
   ok_models <- FALSE
 
-  # Check connection to Ollama
+  # Test Ollama connection
   conn <- tryCatch(
     ollamar::test_connection(),
     error = function(e) NULL
@@ -286,13 +288,15 @@ check_ollama <- function(verbose = TRUE) {
     ok_connection <- TRUE
   }
 
-  # Check model list only if connection is successful
+  # If connected, try to get list of models
   if (ok_connection) {
     models <- tryCatch(
       ollamar::list_models(),
       error = function(e) NULL
     )
     ok_models <- is.data.frame(models) && nrow(models) > 0
+  } else {
+    models <- NULL
   }
 
   if (verbose) {
@@ -301,7 +305,10 @@ check_ollama <- function(verbose = TRUE) {
     } else if (!ok_models) {
       message("Connected to Ollama, but no models are currently installed.")
     } else {
-      message("Ollama is installed, running, and models are available.")
+      message("Ollama is installed, running, and models are available:")
+      model_names <- if ("name" %in% colnames(models)) models$name else as.character(models[[1]])
+      # Print model names in a nice format
+      message(paste("-", model_names, collapse = "\n"))
     }
   }
 

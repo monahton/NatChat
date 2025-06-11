@@ -8,17 +8,17 @@ build_prompt(
   title,
   abstract,
   nsentences = 3L,
-  instructions = c("I am giving you a paper's title and abstract.",
-    "Summarize the paper in as many sentences as I instruct.",
-    "Do not include any preamble text to the summary,",
-    "just give me the summary with no preface or intro sentence.",
-    "Focus on the findings in the last 2 sentences of the abstract.",
-    "If there is no abstract, just write abstract is not available.",
-    "Highlight any novel contribution or claim made in the abstract.",
-    "Briefly mention the key method or dataset, if explicitly stated.",
-    "Indicate the tone of confidence (e.g., suggestive, strong evidence, preliminary).",
+  instructions = c("You will receive a paper's title and abstract as input.",
+    "Provide a concise summary with exactly the number of sentences specified.",
+    "Do not include introductory phrases or preamble text.",
+    "Start directly with the summary; avoid any framing statements.",
+    "Focus on key findings, especially of last two sentences of the abstract.",
+    "If the abstract is missing, reply explicitly with 'Abstract is not available.'",
+    "Highlight any novel contributions, claims, or innovations in the abstract.",
+    "Mention main methods or datasets only if explicitly stated in the abstract.", 
     
-     "Optionally, provide a one-sentence lay summary for a general audience.")
+    "Indicate the strength and tone of evidence.",
+    "Optionally,add a one-sentence lay summary for a non-specialist audience.")
 )
 }
 \arguments{
