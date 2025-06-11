@@ -1,3 +1,5 @@
+# NatChat 1.1.0
+
 # NatChat 1.0.1
 
 * Second public release of **NatChat**, with enhanced functionality.
