@@ -46,17 +46,17 @@ The prompt emphasizes extracting key findings, methodology, and tone, and is cus
 <span>  <span class="va">title</span>,</span>
 <span>  <span class="va">abstract</span>,</span>
 <span>  nsentences <span class="op">=</span> <span class="fl">3L</span>,</span>
-<span>  instructions <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"I am giving you a paper's title and abstract."</span>,</span>
-<span>    <span class="st">"Summarize the paper in as many sentences as I instruct."</span>,</span>
-<span>    <span class="st">"Do not include any preamble text to the summary,"</span>,</span>
-<span>    <span class="st">"just give me the summary with no preface or intro sentence."</span>,</span>
-<span>    <span class="st">"Focus on the findings in the last 2 sentences of the abstract."</span>,</span>
-<span>    <span class="st">"If there is no abstract, just write abstract is not available."</span>,</span>
-<span>    <span class="st">"Highlight any novel contribution or claim made in the abstract."</span>,</span>
-<span>    <span class="st">"Briefly mention the key method or dataset, if explicitly stated."</span>,</span>
-<span>    <span class="st">"Indicate the tone of confidence (e.g., suggestive, strong evidence, preliminary)."</span>,</span>
+<span>  instructions <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"You will receive a paper's title and abstract as input."</span>,</span>
+<span>    <span class="st">"Provide a concise summary with exactly the number of sentences specified."</span>,</span>
+<span>    <span class="st">"Do not include introductory phrases or preamble text."</span>,</span>
+<span>    <span class="st">"Start directly with the summary; avoid any framing statements."</span>,</span>
+<span>    <span class="st">"Focus on key findings, especially of last two sentences of the abstract."</span>,</span>
+<span>    <span class="st">"If the abstract is missing, reply explicitly with 'Abstract is not available.'"</span>,</span>
+<span>    <span class="st">"Highlight any novel contributions, claims, or innovations in the abstract."</span>,</span>
+<span>    <span class="st">"Mention main methods or datasets only if explicitly stated in the abstract."</span>, </span>
 <span>    </span>
-<span>     <span class="st">"Optionally, provide a one-sentence lay summary for a general audience."</span><span class="op">)</span></span>
+<span>    <span class="st">"Indicate the strength and tone of evidence."</span>,</span>
+<span>    <span class="st">"Optionally,add a one-sentence lay summary for a non-specialist audience."</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -100,7 +100,7 @@ Must be a positive whole number.</p></dd>
 <span class="r-in"><span><span class="va">abstract</span> <span class="op">&lt;-</span> <span class="st">"This study explores deep learning in diverse tasks highlighting predictive accuracy."</span></span></span>
 <span class="r-in"><span><span class="va">prompt</span> <span class="op">&lt;-</span> <span class="fu">build_prompt</span><span class="op">(</span><span class="va">title</span>, <span class="va">abstract</span>, nsentences <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="va">prompt</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> I am giving you a paper's title and abstract. Summarize the paper in as many sentences as I instruct. Do not include any preamble text to the summary, just give me the summary with no preface or intro sentence. Focus on the findings in the last 2 sentences of the abstract. If there is no abstract, just write abstract is not available. Highlight any novel contribution or claim made in the abstract. Briefly mention the key method or dataset, if explicitly stated. Indicate the tone of confidence (e.g., suggestive, strong evidence, preliminary). Optionally, provide a one-sentence lay summary for a general audience.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> You will receive a paper's title and abstract as input. Provide a concise summary with exactly the number of sentences specified. Do not include introductory phrases or preamble text. Start directly with the summary; avoid any framing statements. Focus on key findings, especially of last two sentences of the abstract. If the abstract is missing, reply explicitly with 'Abstract is not available.' Highlight any novel contributions, claims, or innovations in the abstract. Mention main methods or datasets only if explicitly stated in the abstract. Indicate the strength and tone of evidence. Optionally,add a one-sentence lay summary for a non-specialist audience.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Number of sentences in summary: 3</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Title: Deep Learning for Genomic Data Analysis</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Abstract: This study explores deep learning in diverse tasks highlighting predictive accuracy.</span>
@@ -116,7 +116,7 @@ Must be a positive whole number.</p></dd>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.2.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
 </div>
 
     </footer></div>
