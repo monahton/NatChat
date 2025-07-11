@@ -14,6 +14,10 @@ issues](https://img.shields.io/github/issues/monahton/NatChat)](https://github.c
 [![Platform](https://img.shields.io/badge/platform-all-green)](https://cran.r-project.org/)
 [![Website](https://img.shields.io/badge/docs-website-blue)](https://monahton.github.io/NatChat/)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.15482472.svg)](https://doi.org/10.5281/zenodo.15482472)
+[![name status
+badge](https://monahton.r-universe.dev/badges/:name)](https://monahton.r-universe.dev/)
+[![registry status
+badge](https://monahton.r-universe.dev/badges/:registry)](https://monahton.r-universe.dev/)
 
 [![Last
 commit](https://img.shields.io/github/last-commit/monahton/NatChat)](https://github.com/monahton/GencoDymo2/commits/main)
