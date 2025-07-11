@@ -89,37 +89,36 @@ If titles, URLs, and abstracts differ in length, they are truncated to the short
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">get_articles</span><span class="op">(</span><span class="st">"Nature Biotechnology"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 37 × 4</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 39 × 4</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    title                                                   url   abstract source</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> Biopharma dives into tumor-seeking radioactive drugs    http… Big pha… Natur…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> Consternation follows Marks’ FDA departure              http… Abstrac… Natur…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> FDA pushes to replace animal testing                    http… Abstrac… Natur…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> Fruit waste for catwalk fashion                         http… Abstrac… Natur…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> Brazil’s low-cost CAR-Ts take on Global South           http… Abstrac… Natur…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> Biotech news from around the world                      http… Abstrac… Natur…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> Precision neuroscience                                  http… Develop… Natur…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> Lengthy delays in H5N1 genome submissions to GISAID     http… Abstrac… Natur…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> Openness guides discovery                               http… Abstrac… Natur…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> The Protein Design Archive (PDA): insights from 40 yea… http… Abstrac… Natur…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 27 more rows</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> Go fund a brain gain                                    http… The gut… Natur…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> Powering new therapeutics with precision mitochondrial… http… More pr… Natur…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> Individualized mRNA cancer vaccines make strides        http… The fir… Natur…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> Court reignites CRISPR patent dispute                   http… Abstrac… Natur…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> Biotech news from around the world                      http… Abstrac… Natur…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> Merck’s anti-RSV antibody expands protection for infan… http… Merck’s… Natur…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> England poised to green-light precision breeding        http… Abstrac… Natur…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> FDA says GM pigs safe to eat                            http… Abstrac… Natur…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> Beyond cell atlases: spatial biology reveals mechanism… http… As the … Natur…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> A call for built-in biosecurity safeguards for generat… http… Abstrac… Natur…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 29 more rows</span></span>
 <span class="r-in"><span><span class="fu">get_articles</span><span class="op">(</span><span class="st">"Nature Reviews Genetics"</span>, verbose <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Accessing URL: https://www.nature.com/nrg/current-issue</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Extracting articles from https://www.nature.com/nrg/current-issue</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> 10 articles successfully extracted.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 10 × 4</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    title                                                   url   abstract source</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> RNA splicing — a central layer of gene regulation       http… Technol… Natur…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> Beyond the black box with biologically informed neural… http… Biologi… Natur…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> TACIT and CoTACIT for histone modification profiling i… http… In this… Natur…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> A tour de force of ancient DNA analysis                 http… Ian Bar… Natur…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> SHOX value: the pseudoautosomal gene underlying short … http… In this… Natur…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> Revealing secrets of human genetic variation with popu… http… In this… Natur…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> The regulation and function of post-transcriptional RN… http… Post-tr… Natur…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> A phylogenetic approach to comparative genomics         http… Control… Natur…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> Epigenetics and individuality: from concepts to causal… http… Recent … Natur…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> Intrinsically disordered regions as facilitators of th… http… Intrins… Natur…</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 9 articles successfully extracted.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 9 × 4</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   title                                                    url   abstract source</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> Challenges and solutions to the sustainability of gene … http… Despite… Natur…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> SLAM-RT&amp;Tag: spatiotemporal profiling of RNA within nuc… http… In this… Natur…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> Simultaneous single-cell sequencing of RNA and DNA at s… http… In this… Natur…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> An uneasy truce between population health and the gene … http… In this… Natur…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> One but not the same — the many genomes of the brain     http… In this… Natur…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> Diversity and consequences of structural variation in t… http… Collins… Natur…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">7</span> Cytoplasmic mRNA decay and quality control machineries … http… In this… Natur…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">8</span> Progress in understanding the vertebrate segmentation c… http… In this… Natur…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">9</span> Integrating model systems and genomic insights to decip… http… This Re… Natur…</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
